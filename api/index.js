@@ -3,8 +3,13 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import userRoutes from "./routes/user.route.js";
+import authRoutes from "./routes/auth.route.js";
 
 // const dotenv = require("dotenv");
+
+const app = express();
+
+app.use(express.json());
 
 dotenv.config();
 
@@ -16,10 +21,10 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-const app = express();
 
 app.listen(3000, () => {
   console.log("running at 3000");
 });
 
 app.use("/api/user", userRoutes);
+app.use("/api/auth", authRoutes);
