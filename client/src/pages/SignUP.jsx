@@ -7,12 +7,13 @@ export default function SignUP() {
   const [formData, setFormData] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const loadFormData = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
-  // console.log(formData);
+  console.log(formData);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.username || !formData.email || !formData.password) {
