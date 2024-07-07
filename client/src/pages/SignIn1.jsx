@@ -1,13 +1,20 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { BiLock, BiUser, BiMailSend, BiLogoGoogle } from "react-icons/bi";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInFailure,
+  signInStart,
+  signInSuccess,
+} from "../redux/user/userSlice";
 
-export default function SignUP() {
+export default function SignIn() {
   const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { loading, error: errorMessage } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const loadFormData = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
@@ -16,13 +23,12 @@ export default function SignUP() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.username || !formData.email || !formData.password) {
-      return setErrorMessage("Please fill out all fields");
+    if (!formData.email || !formData.password) {
+      return dispatch(signInFailure("Please fill out all fields"));
     }
     try {
-      setLoading(true);
-      setErrorMessage(null);
-      const res = await fetch("/api/auth/signup", {
+      dispatch(signInStart());
+      const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,15 +38,15 @@ export default function SignUP() {
       const data = res.json();
       // console.log(data);
       if (data.success === false) {
-        return setErrorMessage(data.message);
+        dispatch(signInFailure(data.message));
       }
-      setLoading(false);
+
       if (res.ok) {
-        navigate("/sign-in");
+        dispatch(signInSuccess(data));
+        navigate("/");
       }
     } catch (error) {
-      setErrorMessage(error.message);
-      setLoading(false);
+      dispatch(signInFailure(error.message));
     }
   };
   return (
@@ -69,16 +75,6 @@ export default function SignUP() {
         <div className=" flex-1">
           <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
             <div className="">
-              <Label value="Your username" />
-              <TextInput
-                type="text"
-                placeholder="Username"
-                id="username"
-                icon={BiUser}
-                onChange={loadFormData}
-              />
-            </div>
-            <div className="">
               <Label value="Your email" />
               <TextInput
                 type="text"
@@ -92,17 +88,16 @@ export default function SignUP() {
               <Label value="Your password" />
               <TextInput
                 type="text"
-                placeholder="Password"
+                placeholder="**********"
                 id="password"
                 icon={BiLock}
                 onChange={loadFormData}
               />
             </div>
             <Button
-              className=" bg-gradient-to-r from-green-600
-              via-green-700 to-green-800 hover:bg-green-900 "
+              className=" bg-green-700 hover:bg-green-900 "
               type="submit"
-              disabled={loading}
+              // disabled={loading}
             >
               {loading ? (
                 <>
@@ -110,7 +105,7 @@ export default function SignUP() {
                   <span className=" pl-3">Loading...</span>
                 </>
               ) : (
-                "Sign Up"
+                "Sign In"
               )}
             </Button>
           </form>

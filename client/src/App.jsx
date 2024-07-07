@@ -8,22 +8,29 @@ import Dashboard from "./pages/Dashboard";
 import Header from "./componets/Header";
 import Header2 from "./componets/Header2";
 import Footer from "./componets/Footer";
+import PrivateRoute from "./componets/PrivateRoute";
+import CreatePost from "./pages/CreatePost";
+import IsAdminPrivateRoute from "./componets/IsAdminPrivateRoute";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Header />
-      <Header2 />
+      {/* <Header2 /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/sign-up" element={<SignUP />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+        <Route element={<IsAdminPrivateRoute />}>
+          <Route path="/create-post" element={<CreatePost />} />
+        </Route>
       </Routes>
       <Footer />
     </BrowserRouter>
-    // <About></About>
   );
 }

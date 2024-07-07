@@ -21,7 +21,7 @@ export default function FooterCom() {
                 className="px-2 py-1 bg-gradient-to-r from-lime-600
         via-lime-700 to-green-600 rounded-lg text-white"
               >
-                Landmark
+                Mr. Js
               </span>
               Blog
             </Link>
