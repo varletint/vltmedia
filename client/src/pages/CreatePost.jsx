@@ -1,7 +1,8 @@
 import { Alert, Button, FileInput, Select, TextInput } from "flowbite-react";
 import { React, useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+// import ReactQuill from "react-quill";
+// import "react-quill/dist/quill.snow.css";
+import JoditEditor from "jodit-react";
 import { useNavigate } from "react-router-dom";
 ("react-router-dom");
 
@@ -79,7 +80,7 @@ export default function CreatePost() {
             Upload image
           </Button>
         </div>
-        <ReactQuill
+        {/* <ReactQuill
           theme="snow"
           placeholder="Write something..."
           className=" h-72 mb-12"
@@ -87,6 +88,11 @@ export default function CreatePost() {
             setFormData({ ...formData, content: value });
           }}
           required
+        /> */}
+        <JoditEditor
+          onChange={(value) => {
+            setFormData({ ...formData, content: value });
+          }}
         />
         <Button type="submit" gradientDuoTone="greenToBlue">
           Publish
