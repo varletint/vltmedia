@@ -43,7 +43,7 @@ export const getposts = async (req, res, next) => {
       ...(req.query.searchTerm && {
         $or: [
           { title: { $regex: req.query.searchTerm, $options: "i" } },
-          { content: { $regex: req.query.content, $options: "i" } },
+          { content: { $regex: req.query.searchTerm, $options: "i" } },
         ],
       }),
     })
@@ -70,6 +70,47 @@ export const getposts = async (req, res, next) => {
       totalPosts,
       lastMonthPosts,
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deletepost = async (req, res, next) => {
+  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+    next(errorHandler("403", "Not allowed to delete this post"));
+  }
+  try {
+    await Post.findByIdAndDelete(req.params.postId);
+    res.status(200).json("The post has been deleted");
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updatePost = async (req, res, next) => {
+  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+    next(errorHandler("403", "Not allowed to update this post"));
+  }
+  try {
+    const slug = req.body.title
+      .split(" ")
+      .join("-")
+      .toLowerCase()
+      .replace(/[^a-zA-Z0-9-]/g, "");
+    const updatedPost = await Post.findByIdAndUpdate(
+      req.params.postId,
+      {
+        $set: {
+          title: req.body.title,
+          content: req.body.content,
+          category: req.body.category,
+          slug,
+        },
+      },
+      { new: true }
+    );
+
+    res.status(200).json(updatedPost);
   } catch (error) {
     next(error);
   }

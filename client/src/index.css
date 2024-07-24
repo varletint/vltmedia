@@ -10,3 +10,73 @@ body {
   font-size: 1.05rem;
   /* white-space: normal; */
 }
+.text-green {
+  color: #20a138;
+}
+
+.btn-short {
+  padding: 10px 17px;
+}
+.btn-long {
+  padding: 10px;
+}
+.btn {
+  background: #20a138;
+  color: white;
+
+  transition: all 300ms ease;
+  font-size: 14px;
+  font-weight: 600;
+}
+.btn-rounded {
+  border-radius: 0.5rem;
+}
+.btn-rounded-full {
+  border-radius: 15rem;
+}
+.btn:hover {
+  background: #127725;
+}
+.bg-green {
+  background: #12a32d;
+}
+.bg-black-border {
+  color: black;
+  border: 0.13rem solid #333;
+  transition: all 300ms ease;
+}
+.bg-green-border:hover {
+  color: #12a32d;
+  background: #12a32d;
+}
+.bg-green:hover {
+  background: #12a32d;
+}
+.bg-black-border:hover {
+  background: #07011d;
+}
+.bg-black:hover {
+  background: #12a32d;
+}
+.green-text {
+  color: #12a32d;
+}
+
+.post-content p {
+  margin-bottom: 0.5rem;
+}
+
+.post-content h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: sans-serif;
+  margin: 1.5rem 0;
+}
+
+.post-content a {
+  color: rgb(73, 149, 199);
+  text-decoration: none;
+}
+.border-gray-1 {
+  border: 1px solid gray;
+}

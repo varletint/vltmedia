@@ -1,14 +1,38 @@
 import { Button, Navbar, TextInput, Dropdown, Avatar } from "flowbite-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { signoutSuccess } from "../redux/user/userSlice";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const path = useLocation().pathname;
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [color, setColor] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // console.log(searchTerm);
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get("searchTerm");
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set("searchTerm", searchTerm);
+    const searchQuery = urlParams.toString();
+    console.log(searchQuery);
+    navigate(`/search?${searchQuery}`);
+  };
+
   const handleSignout = async () => {
     try {
       const res = await fetch("/api/user/signout", {
@@ -25,35 +49,35 @@ export default function Header() {
     }
   };
   return (
-    <Navbar className="border-b-2 ">
+    <Navbar className='border-b-2 '>
       <Link
-        to="/"
-        className="self-center whitespace-nowrap text-sm
-        sm:text-xl font-semibold dark:text-white"
-      >
+        to='/'
+        className='self-center whitespace-nowrap text-sm
+        sm:text-xl font-bold dark:text-white '>
         <span
-          className="px-2 py-1 bg-gradient-to-r from-lime-600
-        via-lime-700 to-green-600 rounded-lg text-white"
-        >
-          Mr js
+          className='px-2 py-1 bg-green mr-1 rounded-l text-white
+        tracking-widest'>
+          Varletint
         </span>
-        Blog
+        media
       </Link>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <TextInput
-          type="text"
-          placeholder="search..."
+          type='text'
+          placeholder='search...'
           rightIcon={AiOutlineSearch}
-          className=" hidden lg:inline "
+          className=' hidden lg:inline '
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
 
-      <Button className="w-12 h-10 " color="gray">
+      <Button className='w-12 h-10 lg:hidden ' color='gray'>
         <AiOutlineSearch />
       </Button>
-      <div className="flex gap-2 md:order-2">
-        <Button className="w-12 h-10 hidden lg:inline" color="gray" pill>
+      <div className='flex gap-2 md:order-2'>
+        <Button className='w-12 h-10 hidden lg:inline' color='gray' pill>
           <FaMoon />
         </Button>
         {currentUser ? (
@@ -61,40 +85,58 @@ export default function Header() {
             arrowIcon={false}
             inline
             label={
-              <Avatar img={currentUser.profilePicture} alt="user" rounded />
-            }
-          >
+              <Avatar img={currentUser.profilePicture} alt='user' rounded />
+            }>
             <Dropdown.Header>
-              <span className="block text-sm">@{currentUser.username}</span>
-              <span className="block text-sm font-medium truncate">
+              <span className='block text-sm'>@{currentUser.username}</span>
+              <span className='block text-sm font-medium truncate'>
                 @{currentUser.email}
               </span>
             </Dropdown.Header>
-            <Link to="/dashboard?tab=profile">
+            <Link to='/dashboard?tab=profile'>
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
             <Dropdown.Divider />
             <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
           </Dropdown>
         ) : (
-          <Link to="/sign-in">
-            <Button gradientDuoTone="greenToBlue" outline pill>
+          <Link to='/sign-in' className='flex '>
+            {/* <Button className=" bg-green text-white hover:bg-green-700" pill >
               Sign In
-            </Button>
+            </Button> */}
+            <button className=' btn-short btn btn-rounded-full'>Sign in</button>
           </Link>
         )}
-        <Navbar.Toggle />
+        <Navbar.Toggle color='gray' />
       </div>
-      <Navbar.Collapse>
+      <Navbar.Collapse className=' font-bold text-green-400'>
         <Navbar.Link active={path == "/"} as={"div"}>
-          <Link to="/">Home</Link>
+          {path == "/" ? (
+            <Link className=' font-bold ' to='/'>
+              Home
+            </Link>
+          ) : (
+            <Link className=' font-bold text-green' to='/'>
+              Home
+            </Link>
+          )}
         </Navbar.Link>
         <Navbar.Link active={path == "/about"} as={"div"}>
-          <Link to="/about">About</Link>
+          {path == "/about" ? (
+            <Link className=' font-bold' to='/about'>
+              About
+            </Link>
+          ) : (
+            <Link className=' font-bold text-green' to='/about'>
+              About
+            </Link>
+          )}
         </Navbar.Link>
-        <Navbar.Link active={path == "/projects"} as={"div"}>
-          <Link to="/projects">Projects</Link>
-        </Navbar.Link>
+        {/* <Navbar.Link active={path == "/projects"} as={"div"}>
+          <Link className=' font-bold text-green' to='/projects'>
+            Projects
+          </Link>
+        </Navbar.Link> */}
       </Navbar.Collapse>
     </Navbar>
   );

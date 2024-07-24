@@ -88,105 +88,104 @@ export default function DashProfile() {
 
   return (
     <div
-      className=" max-w-lg mx-auto 
-    p-3 w-full "
-    >
+      className=' max-w-lg mx-auto 
+    p-3 w-full '>
       <h1
-        className=" my-7 text-center 
-      font-semibold text-3xl"
-      >
+        className=' my-7 text-center 
+      font-semibold text-3xl'>
         Profile
       </h1>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <div
-          className="w-32 h-32 self-center  
+          className='w-32 h-32 self-center  
         cursor-pointer shadow-md overflow-hidden 
-        rounded-full mb-10"
-        >
+        rounded-full mb-10'>
           <img
             src={currentUser.profilePicture}
-            alt="user"
-            className=" rounded-full w-full h-full 
+            alt='user'
+            className=' rounded-full w-full h-full 
             object-cover border-0 border-[lightgray] 
-            "
+            '
           />
         </div>
 
         <TextInput
-          type="text"
-          id="username"
-          placeholder="username"
+          type='text'
+          id='username'
+          placeholder='username'
           defaultValue={currentUser.username}
           onChange={handleChange}
         />
         <TextInput
-          type="email"
-          id="email"
+          type='email'
+          id='email'
           onChange={handleChange}
-          placeholder="email"
+          placeholder='email'
           defaultValue={currentUser.email}
         />
         <TextInput
-          type="text"
-          id="password"
+          type='text'
+          id='password'
           onChange={handleChange}
-          placeholder="************"
+          placeholder='************'
         />
-        <Button
-          type="submit"
-          className=" bg-gradient-to-r from-green-600
-        via-green-600 to-green-700"
-          disabled={loading}
-        >
-          {loading ? "loading" : "Update"}
-        </Button>
-        {currentUser.isAdmin && (
-          <Link to={"/create-post"}>
-            <Button type="button" className=" w-full" color="green">
+        <div className=' flex flex-col justify-between gap-2 lg:flex-row w-full'>
+          <button
+            type='submit'
+            className=' lg:w-24 btn btn-long btn-rounded'
+            disabled={loading}>
+            {loading ? "loading" : "Update"}
+          </button>
+
+          {currentUser.isAdmin && (
+            <Link to={"/create-post"}>
+              {/* <Button type="button" className=" w-full" color="green">
               Create a Post
-            </Button>
-          </Link>
-        )}
+            </Button> */}
+              <button className=' w-full  btn  btn-long btn-rounded'>
+                Create post
+              </button>
+            </Link>
+          )}
+        </div>
       </form>
-      <div className=" flex justify-between text-red-500 mt-5">
-        <span className=" cursor-pointer" onClick={() => setShowModel(true)}>
+      <div className=' flex justify-between text-red-500 mt-5'>
+        <span className=' cursor-pointer' onClick={() => setShowModel(true)}>
           Delete Account
         </span>
-        <span onClick={handleSignout} className=" cursor-pointer">
+        <span onClick={handleSignout} className=' cursor-pointer'>
           Sign Out
         </span>
       </div>
 
       {error && (
-        <Alert color="failure" className=" mt5">
+        <Alert color='failure' className=' mt5'>
           {error}
         </Alert>
       )}
 
       <Modal
         show={showModel}
-        size="md"
+        size='md'
         onClose={() => setShowModel(false)}
-        popup
-      >
+        popup>
         <Modal.Header>
           <Modal.Body>
-            <div className="text-center">
-              <HiOutlineExclamationCircle className="h-14 w-14 text-gray-400 mx-auto mb-4" />
-              <h3 className=" text-gray-400 mb-4">
+            <div className='text-center'>
+              <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 mx-auto mb-4' />
+              <h3 className=' text-gray-400 mb-4'>
                 Are you sure want to delete your account
               </h3>
-              <div className=" flex  justify-center gap-4">
-                <Button onClick={handleDeleteUser} color="failure">
+              <div className=' flex  justify-center gap-4'>
+                <Button onClick={handleDeleteUser} color='failure'>
                   Yes, i'm sure
                 </Button>
                 <Button
-                  color="green"
+                  color='green'
                   onClick={() => {
                     setShowModel(false);
-                  }}
-                >
+                  }}>
                   Cancel
                 </Button>
               </div>
