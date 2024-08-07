@@ -6,15 +6,15 @@ export default function FooterCom() {
   return (
     <Footer
       container
-      className=' border border-t-8 
-    border-green-200 bg-gray-50'>
+      className=' border border-t- 
+    border-gray-500 bg-gray-950'>
       <div className=' w-full max-w-7xl mx-auto'>
         <div className=' grid w-full justify-between sm:flex md:grid-cols-1'>
-          <div className=' mt-5'>
+          <div className=' mt-5 select-none '>
             <Link
               to='/'
-              className='self-center whitespace-nowrap text-sm
-        sm:text-xl font-bold dark:text-white '>
+              className='cursor-none self-center whitespace-nowrap text-sm
+        sm:text-xl font-bold text-gray-400 dark:text-white '>
               <span className='px-2 py-1 bg-green mr-1 rounded-l text-white'>
                 Varletint
               </span>
@@ -25,16 +25,10 @@ export default function FooterCom() {
             <div>
               <Footer.Title title='About' />
               <Footer.LinkGroup col>
-                <Footer.Link
-                  href='https://www.100jsprojects.com'
-                  target='_blank'
-                  rel='noopener noreferrer'>
+                <Footer.Link href='/' target='_blank' rel='noopener noreferrer'>
                   Varletint
                 </Footer.Link>
-                <Footer.Link
-                  href='https://www.100jsprojects.com'
-                  target='_blank'
-                  rel='noopener noreferrer'>
+                <Footer.Link href='/' target='_blank' rel='noopener noreferrer'>
                   Mr Js
                 </Footer.Link>
               </Footer.LinkGroup>

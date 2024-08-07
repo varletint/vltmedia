@@ -18,7 +18,7 @@ export default function Home() {
     fetchPosts();
   }, []);
   return (
-    <div className='mb-20'>
+    <div className='mb-20 font-[poppins]'>
       <div
         className='flex flex-col gap-6 px-6 lg:p-28 p-3 max-w-6xl mx-auto
         '>

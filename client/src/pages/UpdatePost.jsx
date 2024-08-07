@@ -5,16 +5,25 @@ import "react-quill/dist/quill.snow.css";
 // import JoditEditor from "jodit-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
+import { app } from "../firebase";
+import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 export default function UpdatePost() {
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
   const { currentUser } = useSelector((state) => state.user);
+  const [file, setFile] = useState(null);
+  const [imageUploadProgress, setImageUploadProgress] = useState(null);
+  const [imageUploadError, setImageUploadError] = useState(null);
   const navigate = useNavigate();
   const { postId } = useParams();
-  // const { DataId } = useParams();
-  // console.log(postId + " poId");
-  // console.log(formData.post._id);
 
   useEffect(() => {
     try {
@@ -36,6 +45,45 @@ export default function UpdatePost() {
       console.log(data.message);
     }
   }, [postId]);
+
+  // Image upload function
+  const handleUploadImage = async () => {
+    try {
+      if (!file) {
+        setImageUploadError("Image must be selected");
+        return;
+      }
+      setImageUploadError(null);
+      const storage = getStorage(app);
+      const fileName = new Date().getTime() + "-" + file.name;
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setImageUploadProgress(progress.toFixed(0));
+        },
+        (error) => {
+          setImageUploadError("Image failed to upload");
+          setImageUploadProgress(null);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
+            setImageUploadProgress(null);
+            setImageUploadError(null);
+            setFormData({ ...formData, image: downloadUrl });
+          });
+        }
+      );
+    } catch (error) {
+      setImageUploadError("Image failed to upload");
+      setImageUploadProgress(null);
+      console.log(error);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -91,15 +139,20 @@ export default function UpdatePost() {
             }}
             value={formData.category}>
             <option value='uncategorized'>Select a category</option>
-            <option value='Javascript'>JavaScript</option>
-            <option value='html'>HTML</option>
-            <option value='reactjs'>React.js</option>
+            <option value='entertainment'>Entertainments</option>
+            <option value='politics'>Politics</option>
+            <option value='sport'>Sports/Football</option>
+            <option value='Education'>Education</option>
           </Select>
         </div>
         <div
           className='flex gap-4 items-center justify-between
         border-4 border-gray-400 border-dotted p-3'>
-          <FileInput type='file' accept='image/*' />
+          <FileInput
+            type='file'
+            accept='image/*'
+            onChange={(e) => setFile(e.target.files[0])}
+          />
 
           <button
             type='button'
@@ -108,17 +161,37 @@ export default function UpdatePost() {
             text-black
           '
             size='sm'
-            outline>
-            Upload image
+            onClick={handleUploadImage}
+            outline
+            disabled={imageUploadProgress}>
+            {imageUploadProgress ? (
+              <div className=' h-10 w-10'>
+                <CircularProgressbar
+                  styles={buildStyles({
+                    backgroundColor: "#12a32d",
+                    pathColor: "#12a32d",
+                    textColor: "#12a32d",
+                    trailColor: "",
+                  })}
+                  value={imageUploadProgress}
+                  text={`${imageUploadProgress || 0}%`}
+                />
+              </div>
+            ) : (
+              "Upload image"
+            )}
           </button>
-        </div>{" "}
-        {/* {formData.image && (
+        </div>
+        {imageUploadError && (
+          <Alert color={"failure"}> {imageUploadError} </Alert>
+        )}
+        {formData.image && (
           <img
             src={formData.image}
             alt='Upload'
             className='w-full h-72 object-cover'
           />
-        )} */}
+        )}
         <ReactQuill
           theme='snow'
           placeholder='Write something...'

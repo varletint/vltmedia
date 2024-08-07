@@ -30,7 +30,7 @@ export default function Header() {
     urlParams.set("searchTerm", searchTerm);
     const searchQuery = urlParams.toString();
     console.log(searchQuery);
-    navigate(`/search?${searchQuery}`);
+    navigate(`/search?${searchQuery}&order=${"desc"}`);
   };
 
   const handleSignout = async () => {
@@ -49,17 +49,19 @@ export default function Header() {
     }
   };
   return (
-    <Navbar className='border-b-2 '>
+    <Navbar className='border-b-2 font-[poppins]'>
       <Link
         to='/'
         className='self-center whitespace-nowrap text-sm
-        sm:text-xl font-bold dark:text-white '>
+        sm:text-xl font-bold dark:text-white
+        text-green shadow-md
+        select-none cursor-none '>
         <span
-          className='px-2 py-1 bg-green mr-1 rounded-l text-white
-        tracking-widest'>
-          Varletint
+          className='px-2 py-1 bg-green mr-1 rounded text-white
+         text-[24px] shadow'>
+          VLT
         </span>
-        media
+        Varletint
       </Link>
 
       <form onSubmit={handleSubmit}>
@@ -72,10 +74,11 @@ export default function Header() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
-
-      <Button className='w-12 h-10 lg:hidden ' color='gray'>
-        <AiOutlineSearch />
-      </Button>
+      <Link to={"/search"}>
+        <Button className='w-12 h-10 lg:hidden ' color='gray'>
+          <AiOutlineSearch />
+        </Button>
+      </Link>
       <div className='flex gap-2 md:order-2'>
         <Button className='w-12 h-10 hidden lg:inline' color='gray' pill>
           <FaMoon />
@@ -85,7 +88,12 @@ export default function Header() {
             arrowIcon={false}
             inline
             label={
-              <Avatar img={currentUser.profilePicture} alt='user' rounded />
+              <Avatar
+                class=' h-10 w-10 '
+                img={currentUser.profilePicture}
+                alt='user'
+                rounded
+              />
             }>
             <Dropdown.Header>
               <span className='block text-sm'>@{currentUser.username}</span>
@@ -104,7 +112,12 @@ export default function Header() {
             {/* <Button className=" bg-green text-white hover:bg-green-700" pill >
               Sign In
             </Button> */}
-            <button className=' btn-short btn btn-rounded-full'>Sign in</button>
+            <button
+              className=' px-3 py-2 text-white font-[500] bg-[#12a32d]
+              hover:bg-[#127725]  transition-all duration-300
+              shadow-md rounded'>
+              Sign in
+            </button>
           </Link>
         )}
         <Navbar.Toggle color='gray' />

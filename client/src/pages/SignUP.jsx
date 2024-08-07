@@ -19,6 +19,9 @@ export default function SignUP() {
     if (!formData.username || !formData.email || !formData.password) {
       return setErrorMessage("Please fill out all fields");
     }
+    if (formData.password.length < 8) {
+      return setErrorMessage("Password must be 8 character");
+    }
     try {
       setLoading(true);
       setErrorMessage(null);
@@ -50,7 +53,9 @@ export default function SignUP() {
       md:items-center gap-5'>
         {/* left div */}
         <div className=' flex-1'>
-          <Link to='/' className=' font-bold dark:text-white   text-4xl'>
+          <Link
+            to='/'
+            className=' select-none font-bold dark:text-white   text-4xl'>
             <span className='px-2 py-1 bg-green mr-1 rounded-l-lg text-white'>
               Varletint
             </span>

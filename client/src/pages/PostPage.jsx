@@ -2,6 +2,8 @@ import { Button, Spinner } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import CallToAction from "../componets/CallToAction";
+import CommentSection from "../componets/CommentSection";
+import moment from "moment";
 
 export default function PostPage() {
   const { postSlug } = useParams();
@@ -35,15 +37,15 @@ export default function PostPage() {
   }, [postSlug]);
   if (loading)
     return (
-      <div className=' min-h-screen flex  justify-center items-center'>
+      <div className='  min-h-screen flex  justify-center items-center'>
         <Spinner size={"xl"} />
       </div>
     );
   return (
-    <main className='p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
+    <main className='font-[poppins] p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
       <h1
-        className=' self-center text-3xl mt-10 p-3 text-center font-serif
-       max-w-2xl lg:text-4xl'>
+        className=' self-start font-semibold text-3xl mt-10 p-3 text-left 
+       max-w-6xl lg:text-4xl text-gray-600'>
         {post && post.title}
       </h1>
       <Link
@@ -62,18 +64,19 @@ export default function PostPage() {
       <div
         className=' flex justify-between p-3 border-b border-slate-500 mx-auto
       w-full max-w-2xl text-xs'>
-        <span> {post && new Date(post.createdAt).toLocaleDateString()} </span>
+        <span> {post && moment(post.createdAt).fromNow()} </span>
         <span className=' italic'>
           {" "}
           {post && (post.content.length / 1000).toFixed(0)} mins read{" "}
         </span>
       </div>
       <div
-        className=' p-3 max-w-2xl mx-auto w-full post-content'
+        className=' text-gray-500 p-3 max-w-2xl mx-auto w-full post-content'
         dangerouslySetInnerHTML={{ __html: post && post.content }}></div>
       <div className=' max-w-4xl mx-auto w-full '>
         <CallToAction />
       </div>
+      <CommentSection postId={post._id} />
     </main>
   );
 }

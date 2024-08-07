@@ -19,6 +19,10 @@ export const signUp = async (req, res, next) => {
     next(errorHandler(400, "All field are required"));
   }
 
+  if (password.length < 8) {
+    next(errorHandler(400, "Password be at least 8 character"));
+  }
+
   const hashedPassword = bcryptjs.hashSync(password, 10);
 
   const newUser = new User({

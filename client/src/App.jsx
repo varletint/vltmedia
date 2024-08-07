@@ -14,12 +14,12 @@ import UpdatePost from "./pages/UpdatePost";
 import IsAdminPrivateRoute from "./componets/IsAdminPrivateRoute";
 import PostPage from "./pages/PostPage";
 import Flex from "./pages/Flex";
-// import ScrollToTop from "./componets/ScrollToTop";
+import ScrollToTop from "./componets/ScrollToTop";
 import Search from "./pages/Search";
 export default function App() {
   return (
     <BrowserRouter>
-      {/* <ScrollToTop /> */}
+      <ScrollToTop />
       <Header />
       {/* <Header2 /> */}
       <Routes>
