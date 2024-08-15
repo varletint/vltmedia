@@ -11,11 +11,8 @@ import { Link } from "react-router-dom";
 export default function DashUsers() {
   const { currentUser } = useSelector((state) => state.user);
   const [users, setUsers] = useState([]);
-  const [nusers, setNUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState("");
-  const [author, isAuthor] = useState(false);
-  const [makeAuthor, setMakeAuthor] = useState(false);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -24,7 +21,6 @@ export default function DashUsers() {
         const res = await fetch(`/api/user/getUsers`);
         const data = await res.json();
         if (res.ok) {
-          // setUsers(data.userWithOutPassword);
           // setLoading(false);
           setUsers(data.userWithOutPassword);
           setTimeout(() => {
@@ -37,41 +33,11 @@ export default function DashUsers() {
       }
     };
 
-    const handleBoolen = async () => {
-      try {
-        const res = await fetch(`/api/user/makeAuthor/${userId}`, {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: parse(JSON.stringify(users)),
-        });
-        const data = await res.json();
-
-        setUsers({ ...data, isAuthor: !author });
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    handleBoolen();
     if (currentUser.isAdmin) {
       getUsers();
     }
   }, [currentUser._id]);
 
-  // useEffect(() => {
-  //   const handleBoolen = async () => {
-  //     try {
-  //       const res = await fetch(`/api/user/makeAuthor/${userId}`);
-  //       const data = await res.json();
-
-  //       setUsers({ ...data, isAuthor: !author });
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   };
-  //   handleBoolen();
-  // }, [currentUser.isAdmin]);
   return (
     <>
       {loading && <Loading />}
@@ -116,7 +82,7 @@ export default function DashUsers() {
                         <FaTimes className='text-red-500' />
                       )}
                     </Table.Cell>
-                    <Table.Cell onClick={() => setUserId(user._id)} onChange>
+                    <Table.Cell>
                       {user.isAuthor ? (
                         <FaCheck className='text-green-500' />
                       ) : (
