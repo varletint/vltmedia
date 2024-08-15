@@ -249,16 +249,20 @@ export default function DashProfile() {
             disabled={loading || imageFileUploading}>
             {loading ? "Loading..." : "Update"}
           </button>
-          {currentUser.isAdmin ||
-            (currentUser.isAuthor && (
-              <Link to={"/create-post"}>
-                <button
-                  type='button'
-                  className='btn btn-long btn-rounded w-full'>
-                  Create a post
-                </button>
-              </Link>
-            ))}
+          {currentUser.isAdmin && (
+            <Link to={"/create-post"}>
+              <button type='button' className='btn btn-long btn-rounded w-full'>
+                Create a post
+              </button>
+            </Link>
+          )}
+          {currentUser.isAuthor && (
+            <Link to={"/create-post"}>
+              <button type='button' className='btn btn-long btn-rounded w-full'>
+                Create a post
+              </button>
+            </Link>
+          )}
         </form>
         <div className='text-red-500 flex justify-between mt-5'>
           <span onClick={() => setShowModal(true)} className='cursor-pointer'>
