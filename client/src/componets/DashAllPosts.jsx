@@ -16,29 +16,9 @@ export default function DashPosts() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        setLoading(true);
-
-        const res = await fetch(`/api/post/getposts?userId=${currentUser._id}`);
-        const data = await res.json();
-        if (res.ok) {
-          setTimeout(() => {
-            setUserPosts(data.posts);
-            setLoading(false);
-          }, 2000);
-          if (data.posts.length < 9) {
-            setShowMore(false);
-          }
-        }
-      } catch (error) {
-        console.log(error.message);
-        setLoading(false);
-      }
-    };
     const fetchAllPosts = async () => {
       try {
-        // setLoading(true);
+        setLoading(true);
         const res = await fetch("/api/post/getposts");
         const data = await res.json();
 
@@ -54,21 +34,18 @@ export default function DashPosts() {
       }
     };
     if (currentUser.isAdmin) fetchAllPosts();
-    if (currentUser.isAdmin || currentUser.isAuthor) {
-      fetchPosts();
-    }
   }, [currentUser._id]);
 
   const handleShowMore = async () => {
-    const startIndex = userPosts.length;
+    const startIndex = allPosts.length;
     try {
-      const res = await fetch(
-        `/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`
-      );
+      setLoading(true);
+      const res = await fetch(`/api/post/getposts?startIndex=${startIndex}`);
       const data = await res.json();
       if (res.ok) {
-        setUserPosts((prev) => [...prev, ...data.posts]);
+        setAllPosts((prev) => [...prev, ...data.posts]);
         if (data.posts.length < 9) {
+          setLoading(false);
           setShowMore(false);
         }
       }
@@ -80,17 +57,14 @@ export default function DashPosts() {
   const handleDeletePost = async () => {
     setShowModal(false);
     try {
-      const res = await fetch(
-        `/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const res = await fetch(`/api/post/deletepost/${postIdToDelete}`, {
+        method: "DELETE",
+      });
       const data = await res.json();
       if (!res.ok) {
         console.log(data.message);
       } else {
-        setUserPosts((prev) =>
+        setAllPosts((prev) =>
           prev.filter((post) => post._id !== postIdToDelete)
         );
       }
@@ -107,7 +81,7 @@ export default function DashPosts() {
           <Loading />
         ) : (
           <>
-            {currentUser.isAuthor && userPosts.length > 0 ? (
+            {currentUser.isAdmin && allPosts.length > 0 ? (
               <>
                 <Table hoverable className=' shadow-md'>
                   <Table.Head>
@@ -121,7 +95,7 @@ export default function DashPosts() {
                     </Table.HeadCell>
                   </Table.Head>
 
-                  {userPosts.map((post) => (
+                  {allPosts.map((post) => (
                     <Table.Body className=' divide-y'>
                       <Table.Row>
                         <Table.Cell>

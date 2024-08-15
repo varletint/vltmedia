@@ -10,7 +10,6 @@ export default function PostPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [post, setPost] = useState(null);
-  console.log(postSlug);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -38,7 +37,8 @@ export default function PostPage() {
   if (loading)
     return (
       <div className='  min-h-screen flex  justify-center items-center'>
-        <Spinner size={"xl"} />
+        {/* <Spinner size={"xl"} /> */}
+        <div className='loader'></div>
       </div>
     );
   return (
@@ -51,7 +51,7 @@ export default function PostPage() {
       <Link
         to={`/search?category=${post && post.category}`}
         className=' self-center mt-5'>
-        <Button color={"gray"} pill size={"xs"}>
+        <Button className='rounded' color={"gray"} size={"xs"}>
           {post && post.category}
         </Button>
       </Link>
@@ -64,7 +64,7 @@ export default function PostPage() {
       <div
         className=' flex justify-between p-3 border-b border-slate-500 mx-auto
       w-full max-w-2xl text-xs'>
-        <span> {post && moment(post.createdAt).fromNow()} </span>
+        <span> {post && moment(post.createdAt).format("MMM DD, YYYY")} </span>
         <span className=' italic'>
           {" "}
           {post && (post.content.length / 1000).toFixed(0)} mins read{" "}

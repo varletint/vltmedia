@@ -14,9 +14,6 @@ export default function CommentSection({ postId }) {
   const [errorMessage, setErrorMessage] = useState(null);
   const param = useParams();
   const slug = param.postSlug;
-  console.log(slug);
-
-  // console.log(comments);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

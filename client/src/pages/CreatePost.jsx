@@ -23,7 +23,6 @@ export default function CreatePost() {
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
-  console.log(imageUploadProgress);
 
   const handleUploadImage = async () => {
     try {

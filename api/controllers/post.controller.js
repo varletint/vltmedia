@@ -4,10 +4,10 @@ import Post from "../models/post.model.js";
 export const create = async (req, res, next) => {
   const title = req.body.title;
   const content = req.body.content;
-  console.log({ title: title, content: content });
-  if (!req.user.isAdmin) {
-    return next(errorHandler(403, "You are not allowed to create a post"));
-  }
+  // console.log({ title: title, content: content });
+  // if (!req.user.isAdmin || !req.user.isAuthor) {
+  //   return next(errorHandler(403, "You are not allowed to create a post"));
+  // }
   if (!title || !req.body.content) {
     return next(errorHandler(400, "Please provide all required fields"));
   }
@@ -76,9 +76,9 @@ export const getposts = async (req, res, next) => {
 };
 
 export const deletepost = async (req, res, next) => {
-  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
-    next(errorHandler("403", "Not allowed to delete this post"));
-  }
+  // if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+  //   next(errorHandler("403", "Not allowed to delete this post"));
+  // }
   try {
     await Post.findByIdAndDelete(req.params.postId);
     res.status(200).json("The post has been deleted");
@@ -86,11 +86,21 @@ export const deletepost = async (req, res, next) => {
     next(error);
   }
 };
+export const getPostsUser = async (req, res, next) => {
+  try {
+    const comments = await Post.find({ postId: req.params.postId }).sort({
+      createdAt: -1,
+    });
+    res.status(200).json(comments);
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const updatePost = async (req, res, next) => {
-  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
-    next(errorHandler("403", "Not allowed to update this post"));
-  }
+  // if (!req.user.isAuthor || req.user.id !== req.params.userId) {
+  //   next(errorHandler("403", "Not allowed to update this post"));
+  // }
   try {
     const slug = req.body.title
       .split(" ")

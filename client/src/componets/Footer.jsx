@@ -36,7 +36,7 @@ export default function FooterCom() {
             <div>
               <Footer.Title title='Follow us' />
               <Footer.LinkGroup col>
-                <Footer.Link href='https://www.github.com/intvarlet'>
+                <Footer.Link href='https://github.com/varletint'>
                   Github
                 </Footer.Link>
               </Footer.LinkGroup>
@@ -52,10 +52,7 @@ export default function FooterCom() {
           />
           <div className=' flex gap-6 sm:mt-0 mt-4 sm:justify-center'>
             <Footer.Icon href='#' icon={BsTwitter} />
-            <Footer.Icon
-              href='https://www.github.com/intvarlet'
-              icon={BsGithub}
-            />
+            <Footer.Icon href='https://github.com/varletint' icon={BsGithub} />
             <Footer.Icon href='Phone/09123456789' icon={BsTelephone} />
           </div>
         </div>

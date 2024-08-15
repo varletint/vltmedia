@@ -6,6 +6,7 @@ import {
   HiDocumentText,
   HiUsers,
   HiAnnotation,
+  HiChartPie,
 } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -46,12 +47,29 @@ export default function DashSidebar() {
     <Sidebar className='font-[poppins] w-full md:w-56  c '>
       <Sidebar.Items>
         <Sidebar.ItemGroup className=' flex flex-col gap-1'>
+          {currentUser && currentUser.isAdmin && (
+            <Link to='/dashboard?tab=dash'>
+              <Sidebar.Item
+                className=' font-semibold'
+                active={tab === "dash" || tab}
+                icon={HiChartPie}
+                as='div'>
+                Dashboard
+              </Sidebar.Item>
+            </Link>
+          )}
           <Link to='/dashboard?tab=profile'>
             <Sidebar.Item
               labelColor={currentUser.isAdmin ? "green" : "yellow"}
               active={tab === "profile"}
               icon={HiUser}
-              label={currentUser.isAdmin ? "Admin" : "User"}
+              label={
+                currentUser.isAdmin
+                  ? "Admin"
+                  : "User" && currentUser.isAuthor
+                  ? "Author"
+                  : "Users"
+              }
               className=' font-semibold'
               as='div'>
               Profile
@@ -69,7 +87,7 @@ export default function DashSidebar() {
                 </Sidebar.Item>
               </Link>
 
-              <Link to='/dashboard?tab=posts'>
+              <Link to='/dashboard?tab=allposts'>
                 <Sidebar.Item
                   className=' font-semibold'
                   active={tab === "posts"}
@@ -81,13 +99,24 @@ export default function DashSidebar() {
               <Link to='/dashboard?tab=comments'>
                 <Sidebar.Item
                   className=' font-semibold'
-                  active={tab === "posts"}
+                  active={tab === "comments"}
                   icon={HiAnnotation}
                   as='div'>
                   Comments
                 </Sidebar.Item>
               </Link>
             </>
+          )}
+          {currentUser.isAuthor && (
+            <Link to={`/dashboard?tab=posts`}>
+              <Sidebar.Item
+                className=' font-semibold'
+                active={tab === "comments"}
+                icon={HiDocumentText}
+                as='div'>
+                Posts
+              </Sidebar.Item>
+            </Link>
           )}
           <Sidebar.Item
             className=' cursor-pointer font-[500]'

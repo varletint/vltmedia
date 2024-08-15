@@ -1,4 +1,4 @@
-import { Select, Spinner, TextInput } from "flowbite-react";
+import { Label, Select, Spinner, TextInput, Tooltip } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import PostCard from "../componets/PostCard";
@@ -6,8 +6,8 @@ import PostCard from "../componets/PostCard";
 export default function Search() {
   const [sidebarData, setSideBarData] = useState({
     searchTerm: "",
-    sort: "desc",
-    category: "uncategorized",
+    // sort: "desc",
+    category: "",
   });
   console.log(sidebarData);
   const [posts, setPosts] = useState([]);
@@ -19,13 +19,13 @@ export default function Search() {
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get("searchTerm");
-    const sortFromUrl = urlParams.get("sort");
+    // const sortFromUrl = urlParams.get("sort");
     const categoryFromUrl = urlParams.get("category");
-    if (searchTermFromUrl || sortFromUrl || categoryFromUrl) {
+    if (searchTermFromUrl || categoryFromUrl) {
       setSideBarData({
         ...sidebarData,
         searchTerm: searchTermFromUrl,
-        sort: sortFromUrl,
+        // sort: sortFromUrl,
         category: categoryFromUrl,
       });
     }
@@ -56,12 +56,12 @@ export default function Search() {
     if (e.target.id == "searchTerm") {
       setSideBarData({ ...sidebarData, searchTerm: e.target.value });
     }
-    if (e.target.id === "sort") {
-      const order = e.target.value || "desc";
-      setSideBarData({ ...sidebarData, sort: order });
-    }
+    // if (e.target.id === "sort") {
+    //   const order = e.target.value || "desc";
+    //   setSideBarData({ ...sidebarData, sort: order });
+    // }
     if (e.target.id === "category") {
-      const category = e.target.value || "uncategorized";
+      const category = e.target.value || "";
       setSideBarData({ ...sidebarData, category });
     }
   };
@@ -70,7 +70,7 @@ export default function Search() {
     e.preventDefault();
     const urlParams = new URLSearchParams(location.search);
     urlParams.set("searchTerm", sidebarData.searchTerm);
-    urlParams.set("sort", sidebarData.sort);
+    // urlParams.set("sort", sidebarData.sort);
     urlParams.set("category", sidebarData.category);
 
     const searchQuery = urlParams.toString();
@@ -119,8 +119,12 @@ export default function Search() {
             />
           </div>
           <div className='flex items-center gap-2'>
-            <label className='  font-semibold'> Sort:</label>
-            <Select onChange={handleChange} value={sidebarData.sort} id='sort'>
+            <Label value='Sort' className='  font-semibold' disabled />
+            <Select
+              onChange={handleChange}
+              value={sidebarData.sort}
+              id='sort'
+              disabled>
               <option value='desc'>Latest</option>
               <option value='asc'>Oldest</option>
             </Select>
@@ -131,9 +135,11 @@ export default function Search() {
               onChange={handleChange}
               value={sidebarData.category}
               id='category'>
-              <option value='uncategorized'>Uncategory</option>
-              <option value='reactjs'>Reactjs</option>
-              <option value='html'>HTML</option>
+              <option value='uncategorized'>Select a category</option>
+              <option value='entertainment'>Entertainments</option>
+              <option value='politics'>Politics</option>
+              <option value='sport'>Sports/Football</option>
+              <option value='Education'>Education</option>
             </Select>
           </div>
           <button className=' btn btn-long btn-rounded'> Apply Filters</button>

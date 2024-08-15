@@ -7,9 +7,9 @@ export const test = (req, res) => {
 };
 
 export const updateUser = async (req, res, next) => {
-  if (req.user.id !== req.params.userId) {
-    return next(errorHandler(403, "You are not allowed to update this user"));
-  }
+  // if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+  //   return next(errorHandler(403, "You are not allowed to update this user"));
+  // }
   if (req.body.password) {
     if (req.password.length < 8) {
       return next(errorHandler(400, "Password must be at least 8 characters"));
@@ -59,6 +59,8 @@ export const updateUser = async (req, res, next) => {
           password: req.body.password,
           email: req.body.email,
           profilePicture: req.body.profilePicture,
+          isAuthor: req.body.isAuthor,
+          isAdmin: req.body.isAdmin,
         },
       },
       { new: true }
@@ -108,11 +110,25 @@ export const getUsers = async (req, res, next) => {
       .skip(startIndex)
       .limit(limit);
 
+    const totalUsers = await User.countDocuments();
+
+    const now = new Date();
+
+    const oneMonthAgo = new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      now.getDate()
+    );
+
+    const lastMonthUsers = await User.countDocuments({
+      createdAt: { $gte: oneMonthAgo },
+    });
+
     const userWithOutPassword = users.map((user) => {
-      const { password, isAdmin, ...rest } = user._doc;
+      const { password, ...rest } = user._doc;
       return rest;
     });
-    res.status(200).json(userWithOutPassword);
+    res.status(200).json({ userWithOutPassword, totalUsers, lastMonthUsers });
   } catch (error) {
     next(error);
   }
@@ -124,6 +140,18 @@ export const getUser = async (req, res, next) => {
 
     const { password, createdAt, updatedAt, isAdmin, email, ...rest } =
       user._doc;
+    res.status(200).json(rest);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const upGetUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.userId);
+
+    const { password, ...rest } = user._doc;
+
     res.status(200).json(rest);
   } catch (error) {
     next(error);
