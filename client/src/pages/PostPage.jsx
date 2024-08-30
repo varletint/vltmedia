@@ -49,7 +49,11 @@ export default function PostPage() {
         <meta property='og:title' content={post && post.title} />
         <meta property='og:description' content={post && post.title} />
         <meta property='og:image' content={post && post.image} />
-        <meta property='og:slug' content={post && post.slug} />
+        {/* <meta property='og:slug' content={post && post.slug} /> */}
+        <link
+          rel='conical'
+          href={`https://vltmedia.onrender.com/${post && post.slug}`}
+        />
       </Helmet>
       <main className='font-[poppins] p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
         <h1
