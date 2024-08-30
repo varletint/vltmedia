@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import CallToAction from "../componets/CallToAction";
 import CommentSection from "../componets/CommentSection";
 import moment from "moment";
+import { Helmet } from "react-helmet";
 
 export default function PostPage() {
   const { postSlug } = useParams();
@@ -42,41 +43,59 @@ export default function PostPage() {
       </div>
     );
   return (
-    <main className='font-[poppins] p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
-      <h1
-        className=' self-start font-semibold text-3xl mt-10 p-3 text-left 
+    <>
+      <Helmet>
+        <title>{post && post.title}</title>
+        <meta
+          property='og:title'
+          content='How to Become an SEO Expert (8 Steps)'
+        />
+        <meta
+          property='og:description'
+          content='Get from SEO newbie to SEO pro in 8 simple steps.'
+        />
+        <meta
+          property='og:image'
+          content='https://ahrefs.com/blog/wp-content/uploads/2019/12/fb-how-to-become-an-seo-expert.png'
+        />
+        <meta />
+      </Helmet>
+      <main className='font-[poppins] p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
+        <h1
+          className=' self-start font-semibold text-3xl mt-10 p-3 text-left 
        max-w-6xl lg:text-4xl text-gray-600'>
-        {post && post.title}
-      </h1>
-      <Link
-        to={`/search?category=${post && post.category}`}
-        className=' self-center mt-5'>
-        <Button className='rounded' color={"gray"} size={"xs"}>
-          {post && post.category}
-        </Button>
-      </Link>
-      <img
-        src={post && post.image}
-        alt={post && post.title}
-        className=' mt-10 
+          {post && post.title}
+        </h1>
+        <Link
+          to={`/search?category=${post && post.category}`}
+          className=' self-center mt-5'>
+          <Button className='rounded' color={"gray"} size={"xs"}>
+            {post && post.category}
+          </Button>
+        </Link>
+        <img
+          src={post && post.image}
+          alt={post && post.title}
+          className=' mt-10 
       p-3 max-h-[600px] w-full object-cover'
-      />
-      <div
-        className=' flex justify-between p-3 border-b border-slate-500 mx-auto
+        />
+        <div
+          className=' flex justify-between p-3 border-b border-slate-500 mx-auto
       w-full max-w-2xl text-xs'>
-        <span> {post && moment(post.createdAt).format("MMM DD, YYYY")} </span>
-        <span className=' italic'>
-          {" "}
-          {post && (post.content.length / 1000).toFixed(0)} mins read{" "}
-        </span>
-      </div>
-      <div
-        className=' text-gray-500 p-3 max-w-2xl mx-auto w-full post-content'
-        dangerouslySetInnerHTML={{ __html: post && post.content }}></div>
-      <div className=' max-w-4xl mx-auto w-full '>
-        <CallToAction />
-      </div>
-      <CommentSection postId={post._id} />
-    </main>
+          <span> {post && moment(post.createdAt).format("MMM DD, YYYY")} </span>
+          <span className=' italic'>
+            {" "}
+            {post && (post.content.length / 1000).toFixed(0)} mins read{" "}
+          </span>
+        </div>
+        <div
+          className=' text-gray-500 p-3 max-w-2xl mx-auto w-full post-content'
+          dangerouslySetInnerHTML={{ __html: post && post.content }}></div>
+        <div className=' max-w-4xl mx-auto w-full '>
+          <CallToAction />
+        </div>
+        <CommentSection postId={post._id} />
+      </main>
+    </>
   );
 }
