@@ -46,19 +46,10 @@ export default function PostPage() {
     <>
       <Helmet>
         <title>{post && post.title}</title>
-        <meta
-          property='og:title'
-          content='How to Become an SEO Expert (8 Steps)'
-        />
-        <meta
-          property='og:description'
-          content='Get from SEO newbie to SEO pro in 8 simple steps.'
-        />
-        <meta
-          property='og:image'
-          content='https://ahrefs.com/blog/wp-content/uploads/2019/12/fb-how-to-become-an-seo-expert.png'
-        />
-        <meta />
+        <meta property='og:title' content={post && post.title} />
+        <meta property='og:description' content={post && post.title} />
+        <meta property='og:image' content={post && post.image} />
+        <meta property='og:slug' content={post && post.slug} />
       </Helmet>
       <main className='font-[poppins] p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
         <h1
