@@ -14,6 +14,10 @@ const commentSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
+    fullname: {
+      type: String,
+      require: true,
+    },
     likes: {
       type: Array,
       default: [],
