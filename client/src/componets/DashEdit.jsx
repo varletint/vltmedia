@@ -30,7 +30,7 @@ export default function dashEdit() {
     }
     try {
       dispatch(updateStart());
-      const res = await fetch(`/api/user/update/${user._id}`, {
+      const res = await fetch(`/api/user/adminUpdate/${user._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -72,6 +72,31 @@ export const updateUser = async (req, res, next) => {
   }
 };
 
+export const adminUpdateUser = async (req, res, next) => {
+  if (!req.user.isAdmin) {
+    return next(errorHandler(403, "Only Admin is alowwed to Updater users"));
+  }
+
+  const { fullname, isAdmin, isAuthor } = req.body;
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.userId,
+      {
+        $set: {
+          fullname,
+          isAuthor,
+          isAdmin,
+        },
+      },
+      { new: true }
+    );
+    const { password, ...rest } = updatedUser._doc;
+    res.status(200).json(rest);
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const deleteUser = async (req, res, next) => {
   if (req.user.id !== req.params.userId) {
     return next(errorHandler(403, "Not allowed to delete this user"));
