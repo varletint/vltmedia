@@ -32,8 +32,8 @@ export default function Comment({ comment }) {
         <div
           className=' font-[poppins] text-gray-500 flex 
         text-[0.75rem] items-center gap-5'>
-          {/* fullname display */}
-          {/* u */}
+          {/* fullname di6
+        {/*  */}
           <span className=' font-semibold'>{comment.fullname}</span>
           <span className=''>{moment(comment.createdAt).fromNow()}</span>
         </div>
