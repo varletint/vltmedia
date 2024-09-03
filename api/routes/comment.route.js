@@ -8,7 +8,7 @@ import {
 import { verifyToken } from "../utils/verifyUser.js";
 
 const router = express.Router();
-
+// create comment route
 router.post("/createComment", createComment);
 router.get("/getCommentPosts/:postId", getPostComments);
 router.get("/getComments", verifyToken, getComments);

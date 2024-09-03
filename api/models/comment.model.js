@@ -17,6 +17,7 @@ const commentSchema = new mongoose.Schema(
     fullname: {
       type: String,
       require: true,
+      default: "",
     },
     likes: {
       type: Array,

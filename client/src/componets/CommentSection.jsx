@@ -151,7 +151,7 @@ export default function CommentSection({ postId }) {
           </div>
         </>
       ) : (
-        <div className=''> No comments yet</div>
+        <div className=''> No comments yet!</div>
       )}
     </div>
   );

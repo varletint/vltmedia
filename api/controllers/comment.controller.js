@@ -7,8 +7,11 @@ export const createComment = async (req, res, next) => {
     const { content, fullname, postId } = req.body;
 
     const newComment = new Comment({
+      // content of the comment
       content,
+      // full name of the commentator
       fullname,
+      // postId of post commented on
       postId,
     });
     await newComment.save();
