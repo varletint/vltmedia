@@ -48,10 +48,10 @@ export default function PostPage() {
         <title>{post && post.title}</title>
         <meta name='og:title' content={post && post.title} />
         <meta name='og:description' content={post && post.title} />
-        {/* <meta
+        <meta
           name='og:image'
           content='http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg'
-        /> */}
+        />
         <meta name='og:image' content={post && post.image} />
         {/* <meta property='og:slug' content={post && post.slug} /> */}
         <meta
