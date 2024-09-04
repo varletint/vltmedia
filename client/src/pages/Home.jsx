@@ -22,11 +22,8 @@ export default function Home() {
         <Helmet>
           <meta charSet='utf-8' />
           <title>VLT media</title>
-          <meta
-            property='og:image'
-            content='http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg'
-          />
-          <link rel='conical' href='https://vltmedia.onrender.com' />
+          <meta name='og:image' content='../assets/img/more.jpg' />
+          <link rel='canonical' href='https://vltmedia.onrender.com' />
         </Helmet>
       </div>
       <section className='mb-20 font-[poppins]'>
