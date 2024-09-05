@@ -26,9 +26,9 @@ export default function Home() {
           <meta name='og:image' content='../assets/img/more.jpg' />
           <meta name='twitter:image' content='../assets/img/more.jpg' />
           <meta name='og:description' content='Home of local news' />
-          <meta name='og:url' content='http://localhost:5173/' />
+          <meta name='og:url' content='https://vltmedia.onrender.com/' />
           {/* <link rel='canonical' href='https://vltmedia.onrender.com' /> */}
-          <link rel='canonical' href='http://localhost:5173/' />
+          <link rel='canonical' href='https://vltmedia.onrender.com/' />
         </Helmet>
       </div>
       <section className='mb-20 font-[poppins]'>
