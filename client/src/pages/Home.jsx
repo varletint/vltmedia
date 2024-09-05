@@ -22,8 +22,13 @@ export default function Home() {
         <Helmet>
           <meta charSet='utf-8' />
           <title>VLT media</title>
+          <meta name='og:title' content='vlt media' />
           <meta name='og:image' content='../assets/img/more.jpg' />
-          <link rel='canonical' href='https://vltmedia.onrender.com' />
+          <meta name='twitter:image' content='../assets/img/more.jpg' />
+          <meta name='og:description' content='Home of local news' />
+          <meta name='og:url' content='http://localhost:5173/' />
+          {/* <link rel='canonical' href='https://vltmedia.onrender.com' /> */}
+          <link rel='canonical' href='http://localhost:5173/' />
         </Helmet>
       </div>
       <section className='mb-20 font-[poppins]'>
