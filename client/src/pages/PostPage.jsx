@@ -52,12 +52,12 @@ export default function PostPage() {
           name='og:image'
           content='http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg'
         />
-        <meta name='og:image' content={post && post.image} />
+        <meta name='og:image' content={post.image} />
         {/* <meta property='og:slug' content={post && post.slug} /> */}
         <meta
           rel='canonical'
-          content={`https://vltmedia.onrender.com/${post && post.slug}`}
-          href={`https://vltmedia.onrender.com/${post && post.slug}`}
+          content={`https://vltmedia.onrender.com/${post.slug}`}
+          href={`https://vltmedia.onrender.com/${post.slug}`}
         />
         <link
           rel='conical'
