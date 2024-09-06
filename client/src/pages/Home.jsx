@@ -2,7 +2,6 @@ import React from "react";
 import CallToAction from "../componets/CallToAction";
 import { useEffect, useState } from "react";
 import PostCard from "../componets/PostCard2";
-import { Image } from "/FORMATION.png";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
