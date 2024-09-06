@@ -2,6 +2,7 @@ import React from "react";
 import CallToAction from "../componets/CallToAction";
 import { useEffect, useState } from "react";
 import PostCard from "../componets/PostCard2";
+import { Image } from "/FORMATION.png";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
@@ -23,8 +24,14 @@ export default function Home() {
           <meta charSet='utf-8' />
           <title>VLT media</title>
           <meta name='og:title' content='vlt media' />
-          <meta name='og:image' content='../assets/img/more.jpg' />
-          <meta name='twitter:image' content='../assets/img/more.jpg' />
+          <meta
+            name='og:image'
+            content={`https://vltmedia.onrender.com/image`}
+          />
+          <meta
+            name='twitter:image'
+            content='https://vltmedia.onrender.com/assets/img/more.jpg'
+          />
           <meta name='og:description' content='Home of local news' />
           <meta name='og:url' content='https://vltmedia.onrender.com/' />
           {/* <link rel='canonical' href='https://vltmedia.onrender.com' /> */}
