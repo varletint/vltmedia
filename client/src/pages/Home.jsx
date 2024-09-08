@@ -21,8 +21,8 @@ export default function Home() {
       <div className='application'>
         <Helmet>
           <meta charSet='utf-8' />
-          {/* <title>VLT media</title> */}
-          <meta property='og:title' content='vlt media' />
+          <title>VLT media</title>
+          <meta property='og:title' content='var media' />
           <meta property='og:image' content={"/formation.png"} />
           <meta
             property='twitter:image'
