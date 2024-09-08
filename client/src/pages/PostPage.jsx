@@ -48,10 +48,7 @@ export default function PostPage() {
         <title>{post && post.title}</title>
         <meta name='og:title' content={post && post.title} />
         <meta name='og:description' content={post.title} />
-        <meta
-          name='og:image'
-          content={`https://vltmedia.onrender.com/${post && post.image} `}
-        />
+        <meta property='og:image' content={post.image} />
         <meta
           name='og:url'
           content={`https://vltmedia.onrender.com/${post.slug}`}
