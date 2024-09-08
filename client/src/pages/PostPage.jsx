@@ -49,18 +49,18 @@ export default function PostPage() {
     <>
       <Helmet>
         <title>{post && post.title}</title>
-        <meta property='og:title' content={post && post.title} />
-        <meta property='og:description' content={post.title} />
-        {/* <meta property='og:image' content={post.image} /> */}
         <meta
           property='og:image'
           content='https://firebasestorage.googleapis.com/v0/b/varletint.appspot.com/o/1725364802811-IMG_5595.jpeg?alt=media&token=8e3d436e-5084-48e7-90ae-ec953140f165'
         />
+        <meta property='og:title' content={post && post.title} />
+        <meta property='og:description' content={post.title} />
+        {/* <meta property='og:image' content={post.image} /> */}
 
-        <meta
-          name='og:url'
+        {/* <meta
+          property='og:url'
           content={`https://vltmedia.onrender.com/${post.slug}`}
-        />
+        /> */}
         {/* <meta property='og:slug' content={post && post.slug} /> */}
         {/* <meta
           rel='canonical'
