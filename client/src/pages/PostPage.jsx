@@ -11,6 +11,9 @@ export default function PostPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [post, setPost] = useState(null);
+  const [postImage, setPostImage] = useState("");
+
+  console.log(post);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -54,11 +57,11 @@ export default function PostPage() {
           content={`https://vltmedia.onrender.com/${post.slug}`}
         />
         {/* <meta property='og:slug' content={post && post.slug} /> */}
-        <meta
+        {/* <meta
           rel='canonical'
           content={`https://vltmedia.onrender.com/${post.slug}`}
           href={`https://vltmedia.onrender.com/${post.slug}`}
-        />
+        /> */}
       </Helmet>
       <main className='font-[poppins] p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
         <h1
