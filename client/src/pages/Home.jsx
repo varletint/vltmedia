@@ -18,59 +18,55 @@ export default function Home() {
   }, []);
   return (
     <>
-      <div className='application'>
-        <Helmet>
-          <meta charSet='utf-8' />
-          <title>VLT media</title>
-          {/* <meta property='og:title' content='var media' /> */}
-          <meta property='og:image' content={"/formation.png"} />
-          <meta
-            property='twitter:image'
-            content='https://firebasestorage.googleapis.com/v0/b/varletint.appspot.com/o/1725364802811-IMG_5595.jpeg?alt=media&token=8e3d436e-5084-48e7-90ae-ec953140f165'
-          />
-          <meta property='og:description' content='Home of local news' />
-          <meta property='og:url' content='https://vltmedia.onrender.com/' />
-          <meta charset='UTF-8' />
-          <meta name='og:title' content='VLT Media' />
-          <meta name='og:url' content='https://vltmedia.onrender.com' />
-          <meta name='og:title' content='VLT Media' />
-          {/* <meta name='og:description' content='VLT Media' /> */}
-          <meta
-            name='viewport'
-            content='width=device-width, initial-scale=1.0'
-          />
-          <script
-            async
-            src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8476100834116716'
-            crossorigin='anonymous'></script>
-          <meta
-            name='google-adsense-account'
-            content='ca-pub-8476100834116716'
-          />
-          <link rel='apple-touch-icon' sizes='180x180' href='/favicon.ico' />
-          <link
-            rel='icon'
-            type='image/png'
-            sizes='32x32'
-            href='/favicon-32x32.png'
-          />
-          <link
-            rel='icon'
-            type='image/png'
-            sizes='16x16'
-            href='/favicon-16x16.png'
-          />
-          <link rel='manifest' href='/site.webmanifest' />
-          <link rel='preconnect' href='https://fonts.googleapis.com' />
-          <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
-          <link
-            href='https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
-            rel='stylesheet'
-          />
-          {/* <link rel='canonical' href='https://vltmedia.onrender.com' /> */}
-          <link rel='canonical' href='https://vltmedia.onrender.com/' />
-        </Helmet>
-      </div>
+      <Helmet>
+        <meta charSet='utf-8' />
+        <title>VLT media</title>
+        {/* <meta property='og:title' content='var media' /> */}
+        <meta property='og:image' content={"/formation.png"} />
+        <meta
+          property='og:image:secure'
+          content='https://example.com/image'></meta>
+        <meta
+          name='twitter:image'
+          content='https://firebasestorage.googleapis.com/v0/b/varletint.appspot.com/o/1725364802811-IMG_5595.jpeg?alt=media&token=8e3d436e-5084-48e7-90ae-ec953140f165'
+        />
+        <meta property='og:description' content='Home of local news' />
+        <meta property='og:url' content='https://vltmedia.onrender.com/' />
+        <meta charset='UTF-8' />
+        <meta name='og:title' content='VLT Media' />
+        <meta name='og:url' content='https://vltmedia.onrender.com' />
+        <meta name='og:title' content='VLT Media' />
+        {/* <meta name='og:description' content='VLT Media' /> */}
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <script
+          async
+          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8476100834116716'
+          crossorigin='anonymous'></script>
+        <meta name='google-adsense-account' content='ca-pub-8476100834116716' />
+        <link rel='apple-touch-icon' sizes='180x180' href='/favicon.ico' />
+        <link
+          rel='icon'
+          type='image/png'
+          sizes='32x32'
+          href='/favicon-32x32.png'
+        />
+        <link
+          rel='icon'
+          type='image/png'
+          sizes='16x16'
+          href='/favicon-16x16.png'
+        />
+        <link rel='manifest' href='/site.webmanifest' />
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+        <link
+          href='https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
+          rel='stylesheet'
+        />
+        {/* <link rel='canonical' href='https://vltmedia.onrender.com' /> */}
+        <link rel='canonical' href='https://vltmedia.onrender.com/' />
+      </Helmet>
+
       <section className='mb-20 font-[poppins]'>
         <div
           className='flex flex-col gap-6 px-6 lg:p-28 p-3 max-w-6xl mx-auto
