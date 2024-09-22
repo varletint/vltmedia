@@ -49,22 +49,10 @@ export default function PostPage() {
     <>
       <Helmet>
         <title>{post && post.title}</title>
-        <meta property='og:image' content={`${post.image}`} />
+        <meta property='og:image' content={`${post.image}`} name='image' />
         <meta property='og:image:secure' content={`${post.image}`} />
         <meta property='og:title' content={post && post.title} />
         <meta property='og:description' content={post.title} />
-        {/* <meta property='og:image' content={post.image} /> */}
-
-        {/* <meta
-          property='og:url'
-          content={`https://vltmedia.onrender.com/${post.slug}`}
-        /> */}
-        {/* <meta property='og:slug' content={post && post.slug} /> */}
-        {/* <meta
-          rel='canonical'
-          content={`https://vltmedia.onrender.com/${post.slug}`}
-          href={`https://vltmedia.onrender.com/${post.slug}`}
-        /> */}
       </Helmet>
       <main className='font-[poppins] p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
         <h1
