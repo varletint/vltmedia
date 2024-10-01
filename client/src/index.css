@@ -145,9 +145,15 @@ body {
   }
 }
 
-@media (min-width: 360px) {
+/* @media (min-width: 360px) {
   .news-card-grid {
     margin-right: 1.6rem;
     margin-right: 1rem;
+  } */
+/* } */
+@media (min-width: 360px) {
+  .news-card-grid {
+    margin-right: 3rem;
+    /* margin-right: 1rem; */
   }
 }
