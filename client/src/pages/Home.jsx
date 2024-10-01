@@ -75,7 +75,7 @@ export default function Home() {
         <div className='p-3 py-44 bg-gray-100 '>
           <CallToAction />
         </div> */}
-        <div className='max-w-8xl mx-auto p-7 m-4 mt-[5rem]'>
+        <div className='max-w-6xl mx-auto p-7 m-4 mt-[5rem]'>
           {posts && posts.length > 0 && (
             <div className=' flex flex-col gap-6'>
               <h2
