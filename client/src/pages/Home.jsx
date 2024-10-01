@@ -7,12 +7,16 @@ import { Helmet } from "react-helmet";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
+  const [pPosts, setPPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
       const res = await fetch("/api/post/getPosts");
       const data = await res.json();
+      const pRes = await fetch(`/api/post/getposts?category=politics`);
+      const pData = await pRes.json();
       setPosts(data.posts);
+      setPPosts(pData.posts);
     };
     fetchPosts();
   }, []);
@@ -57,7 +61,7 @@ export default function Home() {
       </Helmet>
 
       <section className='mb-20 font-[poppins]'>
-        <div
+        {/* <div
           className='flex flex-col gap-6 px-6 lg:p-28 p-3 max-w-6xl mx-auto
         '>
           <h1 className=' text-4xl font-bold lg:text-5xl text-green mt-28'>
@@ -70,8 +74,8 @@ export default function Home() {
         </div>
         <div className='p-3 py-44 bg-gray-100 '>
           <CallToAction />
-        </div>
-        <div className='max-w-8xl mx-auto p-7 m-4'>
+        </div> */}
+        <div className='max-w-8xl mx-auto p-7 m-4 mt-[5rem]'>
           {posts && posts.length > 0 && (
             <div className=' flex flex-col gap-6'>
               <h2
@@ -80,14 +84,49 @@ export default function Home() {
                 Recent Posts
               </h2>
 
-              <div className='max-w-full mx-auto p-[-81rem] grid gap-[3rem] md:grid-cols-2 lg:grid-cols-3'>
+              {/* <div className='max-w-full mx-auto p-[-81rem] grid gap-[3rem] md:grid-cols-2 lg:grid-cols-3'>
                 {posts.map((post) => (
                   <PostCard key={posts._id} post={post} />
                 ))}
+              </div> */}
+              <div className='_container'>
+                <div className='news-card-grid'>
+                  {posts.map((post) => (
+                    <PostCard key={post._id} post={post} />
+                  ))}
+                </div>
               </div>
               <Link
                 to={"/search"}
-                className='text-teal-500 text-2xl hover:underline text-center'>
+                className='mb-[5rem] text-teal-500 text-l hover:underline text-center'>
+                {" "}
+                View all posts
+              </Link>
+            </div>
+          )}
+          {posts && posts.length > 0 && (
+            <div className=' flex flex-col gap-6'>
+              <h2
+                className=' text-xl font-semibold 
+            text-center text-gray-500'>
+                Politics
+              </h2>
+
+              {/* <div className='max-w-full mx-auto p-[-81rem] grid gap-[3rem] md:grid-cols-2 lg:grid-cols-3'>
+                {posts.map((post) => (
+                  <PostCard key={posts._id} post={post} />
+                ))}
+              </div> */}
+              <div className='_container'>
+                <div className='news-card-grid'>
+                  {pPosts.map((post) => (
+                    <PostCard key={post._id} post={post} />
+                  ))}
+                </div>
+              </div>
+              <Link
+                to={"/search"}
+                className='mb-[5rem] text-teal-500 text-l hover:underline text-center'>
                 {" "}
                 View all posts
               </Link>
