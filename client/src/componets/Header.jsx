@@ -113,7 +113,7 @@ export default function Header() {
               Sign In
             </Button> */}
             <button
-              className=' px-3 py-2 text-white font-[500] bg-[#12a32d]
+              className=' display px-3 py-2 text-white font-[500] bg-[#12a32d]
               hover:bg-[#127725]  transition-all duration-300
               shadow-md rounded'>
               Sign in

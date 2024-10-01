@@ -6,6 +6,9 @@ body {
   height: 100vh;
 }
 
+.display {
+  display: none;
+}
 .ql-editor {
   font-size: 1.05rem;
   /* white-space: normal; */

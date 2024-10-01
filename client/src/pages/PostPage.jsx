@@ -54,7 +54,8 @@ export default function PostPage() {
         <meta property='og:title' content={post && post.title} />
         <meta property='og:description' content={post.title} />
       </Helmet>
-      <main className='font-[poppins] p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
+
+      <div className='font-[poppins] p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
         <h1
           className=' self-start font-semibold text-3xl mt-10 p-3 text-left
        max-w-6xl lg:text-4xl text-gray-600'>
@@ -91,7 +92,7 @@ export default function PostPage() {
 
         {/* Comment Section */}
         <CommentSection postId={post._id} />
-      </main>
+      </div>
     </>
   );
 }
