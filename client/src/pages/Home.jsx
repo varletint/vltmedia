@@ -89,8 +89,8 @@ export default function Home() {
                   <PostCard key={posts._id} post={post} />
                 ))}
               </div> */}
-              <div className='_container'>
-                <div className='news-card-grid'>
+              <div className='_container '>
+                <div className='news-card-grid flex flex-col gap-6'>
                   {posts.map((post) => (
                     <PostCard key={post._id} post={post} />
                   ))}
