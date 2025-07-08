@@ -61,7 +61,7 @@ export default function Header() {
          text-[24px] shadow'>
           VLT
         </span>
-        Varletint
+        varletint
       </Link>
 
       <form onSubmit={handleSubmit}>
